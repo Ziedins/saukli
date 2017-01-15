@@ -41,11 +41,12 @@ $results = mysql_query($data);
   <div class="container">
     <div class="slogan-container">
     <?php while ($row = mysql_fetch_array($results)) { ?>
+    <form method="post"  autocomplete="off">
     <div class="slogan">
       <div class="review">
-        <span class="rate-up"></span>
+        <button type="submit" class="rate-up"></butoon>
         <span class="rating-score"></span>
-        <span class="rate-down"></span>
+        <button class="rate-down"></button>
       </div>
       <div class="slogan-text">
         <?php 
@@ -58,7 +59,6 @@ $results = mysql_query($data);
     </div>
 
     <div class="slogan-add">
-      <form method="post"  autocomplete="off">
        <?php if(isset($errTyp)){ ?><div class="alert alert-success" role="alert"> <?php echo $errTyp; ?> </div><?php } ?>
       <?php if(isset($errMSG)){ ?><div class="alert alert-danger" role="alert"> <?php echo $errMSG; ?> </div><?php } ?>
       <?php if(isset($nameError)){ ?><div class="alert alert-danger" role="alert"> <?php echo $nameError; ?> </div><?php } ?>
