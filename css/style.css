@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+body {
+	margin: 50px;
+	font-family: 'Roboto', sans-serif;
+background: #4DA0B0; 
+background: -webkit-linear-gradient(to left, #4DA0B0 , #D39D38); 
+background: linear-gradient(to left, #4DA0B0 , #D39D38); 
+  }       	
+h1 {
+		
+	}
+.container {
+	float:	left;
+	border-top: 2px solid #fff;
+	width:100%;
+}
+.slogan-container {
+	float: left;
+	width: 100%;
+	max-width: 70%;
+}
+.slogan {
+	width: 100%;
+	margin: 20px 0;
+	float: left;
+}
+.slogan-add {
+	background-color: #fff;
+	width:100%;
+	max-width: calc(30% - 2px);
+	float: right;
+	border: 1px solid ;
+}
+form {
+	width: 100%;
+}
+.slogan-add-title {
+	width: 100%;
+}
+input {
+
+	width: 80%;
+	margin: 20px auto;
+}
+.facebook-login {
+	background-color: #fff;
+	clear: both;
+	float: right;
+	border: 1px solid;
+	width: 100%;
+	max-width: calc(30% - 2px);
+}
