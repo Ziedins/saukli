@@ -1,7 +1,8 @@
 <?php
 ob_start();
 session_start();
-require_once 'dbconnect.php';
+include('dbconnect.php');
+dbConnect();
 $error = false;
 if (isset($_POST['btn-post-slogan'])) {
  $slogan = trim($_POST['slogan']);  
@@ -26,7 +27,11 @@ if (isset($_POST['btn-post-slogan'])) {
 header('Location: index.php');
 exit;
 }
-$data="SELECT * FROM slogans ";
+if (isset($_POST['btn-post-slogan'])) {
+
+}
+
+$data="SELECT * FROM slogans";
 $results = mysql_query($data);
 ?>
 <!DOCTYPE html>
@@ -34,31 +39,30 @@ $results = mysql_query($data);
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="js/script.js"></script>
 <title>Saukļi</title>
 </head>
 <body>
   <h1>Saukļi.lv</h1>
   <div class="container">
     <div class="slogan-container">
-    <?php while ($row = mysql_fetch_array($results)) { ?>
-    <div class="slogan">
+     <form method="post"  autocomplete="off">
+    <?php while ($row = mysql_fetch_array($results)) : ?>
+    <div class="slogan" data-postid="<?php echo $row["idslogans"] ?>" data-score="<?php echo $row['rating'] ?>">
       <div class="review">
-        <span class="rate-up"></span>
-        <span class="rating-score"></span>
-        <span class="rate-down"></span>
+        <div  data-action="up"  class="rate-up rate" title="vote up">UP</div>
+        <div class="rating-score"><?php echo $row['rating'] ?></div>
+        <div  data-action="down"  class="rate-down rate" title="vote down">DOWN</div>
       </div>
       <div class="slogan-text">
-        <?php 
-        echo $row["slogan"];
-?>
+        <?php echo $row["slogan"]; ?>
       </div>
     </div>
-      <?php    
-} ?>
+      <?php endwhile ?>
     </div>
 
     <div class="slogan-add">
-      <form method="post"  autocomplete="off">
        <?php if(isset($errTyp)){ ?><div class="alert alert-success" role="alert"> <?php echo $errTyp; ?> </div><?php } ?>
       <?php if(isset($errMSG)){ ?><div class="alert alert-danger" role="alert"> <?php echo $errMSG; ?> </div><?php } ?>
       <?php if(isset($nameError)){ ?><div class="alert alert-danger" role="alert"> <?php echo $nameError; ?> </div><?php } ?>
@@ -74,4 +78,5 @@ $results = mysql_query($data);
   </div>
 </body>
 </html>
+<?php dbConnect(false); ?>
 <?php ob_end_flush(); ?>

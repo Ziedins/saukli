@@ -24,6 +24,24 @@ h1 {
 	margin: 20px 0;
 	float: left;
 }
+.review {
+	float: left;
+}
+.rate-up {
+display: block;
+}
+.rate-up:after {
+	content: "\25b2";
+}
+.rate-down {
+	display: block;
+}
+.rate-down:after{
+	content: "\25bc";
+}
+.slogan-text {
+	float: left;
+}
 .slogan-add {
 	background-color: #fff;
 	width:100%;
