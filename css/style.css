@@ -1,11 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 body {
 	margin: 50px;
-	font-family: 'Roboto', sans-serif;
-background: #4DA0B0; 
-background: -webkit-linear-gradient(to left, #4DA0B0 , #D39D38); 
-background: linear-gradient(to left, #4DA0B0 , #D39D38); 
-  }       	
+	font-family: 'Roboto', sans-serif;      	
+
+  }
+ .title{
+  	width:100%;
+  	height:100px;
+  	background-color: #6b6b6b;
+  	position: static;
+  	padding-top: 20;
+  }
 h1 {
 		
 	}
@@ -18,6 +23,7 @@ h1 {
 	float: left;
 	width: 100%;
 	max-width: 70%;
+	height: absolute;
 }
 .slogan {
 	width: 100%;
@@ -41,9 +47,10 @@ display: block;
 }
 .slogan-text {
 	float: left;
+	font-weight: bold;
 }
 .slogan-add {
-	background-color: #fff;
+	background-color: #d3d3d3;
 	width:100%;
 	max-width: calc(30% - 2px);
 	float: right;
@@ -62,6 +69,7 @@ input {
 }
 .facebook-login {
 	background-color: #fff;
+	clear: both;
 	float: right;
 	border: 1px solid;
 	width: 100%;
