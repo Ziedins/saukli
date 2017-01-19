@@ -1,10 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 body {
 	margin: 50px;
+
 background: url(../images/background.jpg);
     background-size: 200%;
     font-family: 'Open Sans', sans-serif;
   }       	
+
+
 h1 {
     color: rgba(15, 26, 47, 0.9);
     font-weight: bold;
@@ -23,6 +26,7 @@ h1 {
 	float: left;
 	width: 100%;
 	max-width: 70%;
+	height: absolute;
 }
 .slogan {
 	width: 100%;
@@ -57,11 +61,14 @@ display: block;
 	content: "\25bc";
 }
 .slogan-text {
+
 	display: table-cell;
     vertical-align: middle;
+
+
 }
 .slogan-add {
-	background-color: #fff;
+	background-color: #d3d3d3;
 	width:100%;
 	max-width: calc(30% - 2px);
 	float: right;
@@ -82,6 +89,7 @@ input {
 	clear:right;
 	float: left;
 	background-color: #fff;
+
 	border: 1px solid;
 	width: 100%;
 	max-width: 320px;
