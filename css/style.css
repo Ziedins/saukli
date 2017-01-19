@@ -1,17 +1,22 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 body {
 	margin: 50px;
-	font-family: 'Roboto', sans-serif;
-background: #4DA0B0; 
-background: -webkit-linear-gradient(to left, #4DA0B0 , #D39D38); 
-background: linear-gradient(to left, #4DA0B0 , #D39D38); 
+background: url(../images/background.jpg);
+    background-size: 200%;
+    font-family: 'Open Sans', sans-serif;
   }       	
 h1 {
-		
+    color: rgba(15, 26, 47, 0.9);
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 2.692;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: lighter;
+    font-size: 28px;
+    letter-spacing: 0.02em;
 	}
 .container {
 	float:	left;
-	border-top: 2px solid #fff;
 	width:100%;
 }
 .slogan-container {
@@ -22,10 +27,22 @@ h1 {
 .slogan {
 	width: 100%;
 	margin: 20px 0;
-	float: left;
+	background-color: rgba(15, 26, 47, 0.9);
+	color: rgb(255, 255, 255);
+   font-size: 14px;
+   border-radius: 10px;
+   max-width: 99%;
+   display: table;
+    float: none;
+}
+#login {
+	padding: 10px;
 }
 .review {
-	float: left;
+	display:table-cell;
+	vertical-align: middle;
+	width: 20px;
+	padding: 0 10px 0 0;
 }
 .rate-up {
 display: block;
@@ -40,7 +57,8 @@ display: block;
 	content: "\25bc";
 }
 .slogan-text {
-	float: left;
+	display: table-cell;
+    vertical-align: middle;
 }
 .slogan-add {
 	background-color: #fff;
@@ -58,12 +76,101 @@ form {
 input {
 
 	width: 80%;
-	margin: 20px auto;
+	margin: 0 0 20px 0;
 }
 .facebook-login {
+	clear:right;
+	float: left;
 	background-color: #fff;
-	float: right;
 	border: 1px solid;
 	width: 100%;
-	max-width: calc(30% - 2px);
+	max-width: 320px;
+	border-radius: 12px;
+}
+#sign-up {
+	display:none;
+	padding: 10px;
+}
+.orange-button-mobile, .orange-button, .post-slogan{
+        font-family: 'Open Sans', sans-serif;
+    text-decoration-style: bold;
+    font-size: 13px;
+    border-radius: 100px;
+    width: 140px;
+    height: 50px;
+    color: rgb(255, 255, 255);
+    border-style: none;
+    background-color: rgb(248, 154, 53);
+    letter-spacing: 2px;
+}
+.orange-button-mobile:hover ,  .orange-button:hover, .post-slogan:hover {
+    background-color: #f8bf35;
+    }
+#forgot-button, a {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: rgb(132, 149, 183);
+    text-align: right;
+    padding: 0;
+    border: none;
+    background: none;
+}
+.form-control {
+    outline: none;
+    border: solid;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    width: 280px;
+    border-width: 1px;
+    border-color: #cbd2df;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    color: rgb(62, 73, 94);
+}
+.active-image-mail {
+    background-image: url(../images/ic_mail.png);
+    width: 16px;
+    height: 14px;
+    margin-left: 270px;
+    margin-top: -15px;
+}
+.active-image-lock {
+    background-image: url(../images/ic_lock.png);
+    width: 16px;
+    height: 17px;
+    margin-left: 270px;
+    margin-top:-15px;
+}
+.active-image-user {
+    background-image: url(../images/ic_user.png);
+    width: 14px;
+    height: 16px;
+    margin-left: 270px;
+    margin-top: -15px;
+}
+.input-name {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+  color: rgb(132, 149, 183);
+}
+.blue-button {
+    background-color: transparent;
+    border-width: 2px;
+    font-family: 'Open Sans', sans-serif;
+    text-decoration-style: bold;
+    font-size: 13px;
+    color: rgb(255, 255, 255);
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(73, 171, 254);
+    border-radius: 100px;
+    background-color: rgba(73, 171, 254, 0);
+    letter-spacing: 2px;
+    text-align: center;
+    width:20px;
+    float:right;
+}
+.blue-button:hover {
+    background-color: #49abfe;
 }

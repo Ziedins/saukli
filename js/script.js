@@ -38,3 +38,13 @@ $(document).ready(function(){
     };
   });
 });
+var speedfade = 500;
+function mobileActive() {
+    console.log("herp");
+    $('#login').fadeOut(speedfade, "swing", $('#sign-up').delay(500).fadeIn(speedfade));
+    console.log("herp");
+}
+function mobileLoginActive()
+{
+   $('#sign-up').fadeOut(speedfade, "linear", $('#login').delay(500).fadeIn(speedfade));
+}
