@@ -37,6 +37,21 @@ $(document).ready(function(){
       parent.addClass('.disabled');
     };
   });
+  $('.delete').click(function(){
+      $.ajaxSetup({
+    url: 'delete.php',
+    type: 'POST',
+    cache: 'false'
+  });
+     var action = self.data('action');  
+    var parent = self.parent().parent(); 
+    var postid = parent.data('postid'); 
+    if (!parent.hasClass('.disabled')) {
+        $.ajax({data: {'postid' : postid, 'action' : 'delete'}});
+
+     parent.addClass('.disabled');
+    };
+});
 });
 var speedfade = 500;
 function mobileActive() {

@@ -2,8 +2,9 @@
  ob_start();
    session_start();
    $error = false;
+   
    if (isset($_POST['btn-signup'])) {
-       
+       echo("dadada");
    
        $name = trim($_POST['name']);
        $name = strip_tags($name);
