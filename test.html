@@ -2,8 +2,150 @@
    ob_start();
    session_start();
    include('dbconnect.php');
-   include('function.php');
    dbConnect();
+   $error = false;
+   if (isset($_POST['btn-signup'])) {
+       
+   
+       $name = trim($_POST['name']);
+       $name = strip_tags($name);
+       $name = htmlspecialchars($name);
+       
+       $email = trim($_POST['email']);
+       $email = strip_tags($email);
+       $email = htmlspecialchars($email);
+       
+       $pass = trim($_POST['pass']);
+       $pass = strip_tags($pass);
+       $pass = htmlspecialchars($pass);
+       
+   
+       if (empty($name)) {
+           $error     = true;
+           $nameError = "Please enter your full name.";
+       }
+       
+   
+       if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+           $error      = true;
+           $emailError = "Please enter valid email address.";
+       } else {
+     
+           $query  = "SELECT userEmail FROM users WHERE userEmail='$email'";
+           $result = mysql_query($query);
+           $count  = mysql_num_rows($result);
+           if ($count != 0) {
+               $error      = true;
+               $emailError = "Provided Email is already in use.";
+           }
+       }
+   
+       if (empty($pass)) {
+           $error     = true;
+           $passError = "Please enter password.";
+       } else if (strlen($pass) < 6) {
+           $error     = true;
+           $passError = "Password must have atleast 6 characters.";
+       }
+       
+   
+       $password = hash('sha256', $pass);
+       
+   
+       if (!$error) {
+           
+           $query = "INSERT INTO users(userName,userEmail,userPass) VALUES('$name','$email','$password')";
+           $res   = mysql_query($query);
+           
+           if ($res) {
+               $errTyp = "success";
+               $errMSG = "Successfully registered, you may login now";
+               unset($name);
+               unset($email);
+               unset($pass);
+           }
+           
+       }
+       
+       
+   }
+   
+   
+   if (isset($_POST['btn-login'])) {
+       
+   
+       $email = trim($_POST['email']);
+       $email = strip_tags($email);
+       $email = htmlspecialchars($email);
+       
+       $pass = trim($_POST['pass']);
+       $pass = strip_tags($pass);
+       $pass = htmlspecialchars($pass);
+   
+       
+       if (empty($email)) {
+           $error      = true;
+           $emailError = "Please enter your email address.";
+           echo $emailError;
+       } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+           $error      = true;
+           $emailError = "Please enter valid email address.";
+           echo  $emailError;
+       }
+       
+       if (empty($pass)) {
+           $error     = true;
+           $passError = "Please enter your password.";
+           echo $passError;
+       }
+       
+   
+       if (!$error) {
+           
+           $password = hash('sha256', $pass); 
+           
+           $res   = mysql_query("SELECT userId, userName, userPass FROM users WHERE userEmail='$email'");
+           $row   = mysql_fetch_array($res);
+           $count = mysql_num_rows($res); 
+           
+           if ($count == 1 && $row['userPass'] == $password) {
+               $_SESSION['user'] = $row['userId'];
+               header("Location: home.php");
+           } else {
+                $errMSG = "Incorrect Credentials, Try again...";
+                echo $errMSG;
+           }
+           
+       }
+       
+   }
+   if (isset($_POST['btn-post-slogan'])) {
+    $slogan = trim($_POST['slogan']);  
+     $slogan = htmlspecialchars($slogan);
+   
+     if (empty($slogan)) {
+           $error     = true;
+           $nameError = "Lūdzu ieraksti saukli";
+           echo $nameError;
+       }
+      if (!$error) {
+           
+           $query = "INSERT INTO slogans(slogan) VALUES('$slogan')";
+           $res   = mysql_query($query);
+           
+           if ($res) {
+               $errTyp = "success";
+               $errMSG = "Succesful post";
+               unset($slogan);
+           }
+           
+       }
+   header('Location: index.php');
+   exit;
+   }
+   if (isset($_POST['btn-post-slogan'])) {
+   
+   }
    $data="SELECT * FROM slogans";
    $results = mysql_query($data);
    ?>
@@ -24,20 +166,16 @@
                <?php while ($row = mysql_fetch_array($results)) : ?>
                <div class="slogan" data-postid="<?php echo $row["idslogans"] ?>" data-score="<?php echo $row['rating'] ?>">
                   <div class="review">
-                     <div  data-action="up"  class="rate-up rate" title="vote up"></div>
+                     <div  data-action="up"  class="rate-up rate" title="vote up">UP</div>
                      <div class="rating-score"><?php echo $row['rating'] ?></div>
-                     <div  data-action="down"  class="rate-down rate" title="vote down"></div>
+                     <div  data-action="down"  class="rate-down rate" title="vote down">DOWN</div>
                   </div>
                   <div class="slogan-text">
                      <?php echo $row["slogan"]; ?>
                   </div>
-                  <?php if( isset($_SESSION['adminOn']) ) {?>
-                  <div class="blue-button">X</div>
-                  <?php } ?>
                </div>
                <?php endwhile ?>
          </div>
-         <?php if( isset($_SESSION['user']) ) {?>
          <div class="slogan-add">
          <?php if(isset($errTyp)){ ?><div class="alert alert-success" role="alert"> <?php echo $errTyp; ?> </div><?php } ?>
          <?php if(isset($errMSG)){ ?><div class="alert alert-danger" role="alert"> <?php echo $errMSG; ?> </div><?php } ?>
@@ -45,22 +183,20 @@
          <span class="slogan-add-title">Jauns sauklis:</span>
          <input type="text" name="slogan" placeholder="Your slogan, write an author if it's a quote" maxlength="200"><br>
          <button type="submit" onclick="" name="btn-post-slogan" class="post-slogan" ><b>Post</b></button>
-         <a href="logout.php?logout"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Sign Out</a>
          </form>
          </div>
-         <?php }?>
-         <?php if( !isset($_SESSION['user']) ) {?>
          <div class="facebook-login">
             <div id="sign-up">
                <div class="white-head" id="register-head">
                   <h1 id="signup_header">Sign Up</h1>
+                  <div class="magebit-picture" id ="picture-register"></div>
                   <div class="blue-line" id="register-line"></div>
                </div>
                <form method="post" id="form-login" action="" autocomplete="off">
                   <div class="form-input" >
                      <span class="input-name">Name</span><span class="star">*</span>
                      <div class="active-image-user" id="register-name-img"></div>
-                     <input type="text" name="name" class="form-control" placeholder="" maxlength="50"/>
+                     <input type="text" name="name" class="form-control" placeholder="" maxlength="50" " />
                   </div>
                   <div class="form-input-below">
                      <span class="input-name">Email</span><span class="star">*</span>
@@ -80,6 +216,7 @@
              <div id="login">
                      <div class="white-head" id="login-head">
                         <h1 id="login-header"> Login </h1>
+                        <div class ="magebit-picture" id="picture-login"></div>
                         <div class="blue-line" id="login-line"></div>
                      </div>
                      <form method="post" id="form-login" action="" autocomplete="off">
@@ -96,14 +233,12 @@
                               <input type="password" name="pass" class="form-control" placeholder="" maxlength="15" />
                            </div>
                            <button id="orange-login-button" type="submit" class="orange-button" name="btn-login"><b>LOGIN</b></button>
-                           <button type="button" onclick="mobileActive()" class="orange-button-mobile" ><b>Register</b></button>
                            <button type="" class="" id="forgot-button" name="">Forgot?</button>
-                           
+                           <button type="button" onclick="mobileActive()" class="orange-button-mobile" ><b>Register</b></button>
                         </div>
                      </form>
                   </div>
          </div>
-          <?php }?>
       </div>
    </body>
 </html>

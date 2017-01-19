@@ -6,7 +6,6 @@
  define('DBUSER', 'root');
  define('DBPASS', 'snikers');
  define('DBNAME', 'slogans');
- 
  $conn = mysql_connect(DBHOST,DBUSER,DBPASS);
  $dbcon = mysql_select_db(DBNAME);
  function dbConnect($close=true){
