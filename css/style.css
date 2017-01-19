@@ -20,6 +20,7 @@ h1 {
 	width:100%;
 }
 .slogan-container {
+	clear:both;
 	float: left;
 	width: 100%;
 	max-width: 70%;
@@ -173,4 +174,18 @@ input {
 }
 .blue-button:hover {
     background-color: #49abfe;
+}
+.flag-lv {
+	float:left;
+	background-image: url(../images/lv.png);
+	width: 50px;
+	height: 30px;	
+	background-size: contain;
+}
+.flag-en {
+	float:left;
+	background-image: url(../images/en.png);
+		width: 50px;
+	height: 30px;
+	background-size: contain;
 }

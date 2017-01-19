@@ -2,6 +2,7 @@
 include('dbconnect.php');
 session_start();
 dbConnect();
+echo ("dadada");
 if ($_SERVER['HTTP_X_REQUESTED_WITH']) {
   if (isset($_POST['postid']) AND isset($_POST['action'])) {
     $postId = (int) mysql_real_escape_string($_POST['postid']);
